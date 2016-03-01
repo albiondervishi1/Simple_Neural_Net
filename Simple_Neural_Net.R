@@ -21,7 +21,7 @@ set.seed(11)
 #Initialize weights randomly with mean 0
 syn0 <- 2*runif(3)-1
 
-for(i in range(1:10000)){
+for(i in 1:10000){
     #forward propagation
     layer.0 <- x
     layer.1 <- sigmoid(layer.0 %*% syn0)
