@@ -1,11 +1,5 @@
 ##This script builds a simple two layer neural network.
 
-#Load the required libraries
-library(neuralnet)
-
-#The sigmoid activation function
-sigmoid <- function(x){1/(1+exp(-x))}
-
 #The non-linear function
 nonlin <- function(x){
     x*(1-x)
@@ -24,15 +18,16 @@ set.seed(11)
 #Initialize weights randomly with mean 0
 syn0 <- 2*runif(3)-1
 
-for(i in 1:500){
-    #forward propagation
+for(i in 1:100){
+    #forward propagation using tanh to avoid gradient saturation and 
+    #center around 0.
     layer.0 <- x
-    layer.1 <- sigmoid(layer.0 %*% syn0)
+    layer.1 <- tanh(layer.0 %*% syn0)
 
     #how much did we miss?
     layer.1.error <- y - layer.1
 
-    #multiply how much we missed by the slope of the sigmoid at the values
+    #multiply how much we missed by the slope of the tanh at the values
     #in the second layer
     layer.1.delta <- layer.1.error * nonlin(layer.1)
 
